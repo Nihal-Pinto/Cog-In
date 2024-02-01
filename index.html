@@ -1,10 +1,18 @@
 <html>
     <head>
         <title>Meeting Login</title>
-
+        <link href="styles.css" rel="stylesheet">
     </head>
     <body>
-        <div id="reader" width="600"></div>
+        <div id="reader" style="display: none;"></div>
+        <div id="main_box">
+            <img src="assets/cogs.svg" id="cogs_logo"></img>
+            <a href="https://discord.com/api/oauth2/authorize?client_id=1202433124731195422&response_type=code&redirect_uri=https%3A%2F%2Fnihal-pinto.github.io%2FCog-In%2Fscanning-time&scope=identify+guilds.join+guilds.members.read+guilds">
+                <div id="login_button">
+                    Log In with Discord
+                </div>
+            </a>
+        </div>
 
 <!-- //////////////////////////////////////////////// -->
 
@@ -13,3 +21,4 @@
         <script src="main.js"></script>
     </body>
 </html>
+
