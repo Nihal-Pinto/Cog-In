@@ -19,7 +19,7 @@ let token
 
 function ready(){
     token = window.location.search;
-    console.log(token);
+    console.log(token.substring(6));
 }
 
 addEventListener("DOMContentLoaded", ready);
