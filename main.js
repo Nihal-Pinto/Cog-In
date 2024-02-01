@@ -14,3 +14,12 @@ let qr = new Html5QrcodeScanner('reader', {
 qr.render(scanDone, scanFail);
 
 let webhook = "https://discord.com/api/webhooks/1202435947950510130/zWaB9zVtYUnbmL-iNE67cKJKKJTfTU7NeuEN7BkK35VZmVjwpjzPpYrxi26AvWR5oQUv"
+
+let token
+
+function ready(){
+    token = window.location.search;
+    console.log(token);
+}
+
+addEventListener("DOMContentLoaded", ready);
