@@ -20,6 +20,7 @@ let token
 function ready(){
     token = window.location.search;
     console.log(token.substring(6));
+    console.log(sessionStorage['sessionID']);
 }
 
 addEventListener("DOMContentLoaded", ready);
