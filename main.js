@@ -13,19 +13,35 @@ let token;
 
 let cameras;
 
+// - > - > - > - > - > - > - > - > - > - > - > Camera Save Func  - > - > - > - > - > - > - > - > - > - > - > -
+function saveCamList(event){
+    cameras = event.detail;
+    console.log(cameras);
+    for(var i = 0; i<cameras.length; i++){
+        let temp = document.createElement('div');
+        temp.className = "camListObject";
+        temp.innerText = cameras[i].label;
+        document.getElementById('camera_list').appendChild(temp)
+    }
+}
+
+addEventListener('camerasObtained', saveCamList)
+
+// - > - > - > - > - > - > - > - > - > - > - > Ready Function  - > - > - > - > - > - > - > - > - > - > - > - >
 function ready(){
     token = window.location.search;
-    console.log(token.substring(6));
-    console.log(sessionStorage['sessionID']);
+    cameras = Html5Qrcode.getCameras().then(function(devices){
+        let camsObtained = new CustomEvent('camerasObtained', {detail: devices});
+        dispatchEvent(camsObtained);
+    });
 }
 
 addEventListener("DOMContentLoaded", ready);
 
+// - > - > - > - > - > - > - > - > - > - > - > Other Stuff - > - > - > - > - > - > - > - > - > - > - > - > - >
 function startCommunication(){
     var payload = {
         oa: token,
         st: sessionStorage['sessionID']
     }
-    cameras = HTML5Qrcode.getCameras();
-    console.log(cameras);
 }

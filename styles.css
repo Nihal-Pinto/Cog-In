@@ -58,3 +58,48 @@ body{
 
     flex-grow: 1;
 }
+
+#camera_list{
+    font-size: medium;
+
+    position: absolute;
+    margin-left: calc(50vw - 30vmax);
+    margin-right: calc(50vw - 30vmax);
+    
+    padding: 2em;
+    width: fit-content;
+
+    border: 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 4em;
+    background-color: #111111;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.camListObject{
+    display: block;
+
+    border: 2px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 2em;
+
+    background-color: #171717;
+    color: white;
+    text-align: center;
+
+    padding: 2em;
+    width: calc(100% - 6em);
+    margin: 1em;
+    margin-left: 3em;
+    margin-right: 3em;
+
+    flex-grow: 1;
+    flex: 1;
+}
