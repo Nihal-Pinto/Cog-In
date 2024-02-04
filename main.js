@@ -21,13 +21,15 @@ function saveCamList(event){
         let temp = document.createElement('div');
         temp.className = "camListObject";
         temp.innerText = cameras[i].label;
-        document.getElementById('camera_list').appendChild(temp)
+        temp.setAttribute('onclick', `startScan("${cameras[i].id}")`);
+        document.getElementById('camera_list').appendChild(temp);
     }
 }
 
-addEventListener('camerasObtained', saveCamList)
+addEventListener('camerasObtained', saveCamList);
 
 // - > - > - > - > - > - > - > - > - > - > - > Ready Function  - > - > - > - > - > - > - > - > - > - > - > - >
+
 function ready(){
     token = window.location.search;
     cameras = Html5Qrcode.getCameras().then(function(devices){
@@ -39,6 +41,46 @@ function ready(){
 addEventListener("DOMContentLoaded", ready);
 
 // - > - > - > - > - > - > - > - > - > - > - > Other Stuff - > - > - > - > - > - > - > - > - > - > - > - > - >
+const qr = new Html5Qrcode('scanner_box');
+
+let inter;
+let idG;
+
+function startScan(id){
+    idG=id;
+    let dimension = 0;
+    let h = document.getElementById('scanner_box').offsetHeight;
+    let w = document.getElementById('scanner_box').offsetWidth;
+    if(w > h*1.5){
+        dimension = w/4;
+    } else if(w < h*1.5){
+        dimension = h/4;
+    } else if(w > h) {
+        dimension = w/2;
+    } else if(w < h) {
+        dimension = h/2;
+    } else{
+        dimension = h/1.5;
+    }
+    document.getElementById('camera_list').style.display = 'none';
+    let constr = {
+        height: h,
+        width: w,
+    }
+    let ar = w/h;
+    console.log(ar);
+    console.log(dimension);
+    qr.start(id, {
+        fps: 2,
+        qrbox: {width: dimension, height: dimension},
+        aspectRatio: ar
+    }, scanDone, scanFail).catch((err) => location.reload());
+    addEventListener('resize', restartScan);
+}
+
+function restartScan(){
+    qr.stop().then(() => {startScan(idG)});
+}
 function startCommunication(){
     var payload = {
         oa: token,
